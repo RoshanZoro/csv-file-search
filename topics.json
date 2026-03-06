@@ -6,43 +6,57 @@
         {
           "category": "Subnetting",
           "display": "Binary",
-          "query": "subnet binary",
+          "query": "subnet binary decimal convert",
           "source": "binary",
           "section": ""
         },
         {
           "category": "Subnetting",
           "display": "Subnet Cheat",
-          "query": "subnet",
+          "query": "subnet cidr mask block size",
           "source": "subnet cheat sheet",
           "section": ""
         },
         {
           "category": "Subnetting",
           "display": "Ultimatesubnet Cheat",
-          "query": "subnet ultimatesubnet",
+          "query": "subnet vlsm block size hosts",
           "source": "ultimatesubnet cheat sheet",
           "section": ""
         },
         {
           "category": "Subnetting",
           "display": "Ipv4 Subnetting VLSM",
-          "query": "subnet cisco ipv4 subnetting",
+          "query": "subnet ipv4 vlsm cidr mask hosts",
           "source": "cisco_ipv4_subnetting_vlsm",
           "section": ""
         },
         {
           "category": "Subnetting",
           "display": "Ipv4 VLSM Ipv6",
-          "query": "subnet cisco ipv4 vlsm",
+          "query": "subnet vlsm ipv6 configure router",
           "source": "cisco_ipv4_vlsm_ipv6",
           "section": ""
         },
         {
           "category": "Subnetting",
           "display": "Subnetting OSPF Intervlan",
-          "query": "subnet subnetting ospf intervlan",
+          "query": "subnet ospf vlan",
           "source": "subnetting_ospf_intervlan",
+          "section": ""
+        },
+        {
+          "category": "Subnetting",
+          "display": "Subnetting Reference",
+          "query": "subnet split cidr",
+          "source": "subnetting_reference",
+          "section": ""
+        },
+        {
+          "category": "Subnetting",
+          "display": "Subnetting Concepts",
+          "query": "subnet mask cidr",
+          "source": "subnetting_concepts",
           "section": ""
         }
       ]
@@ -53,98 +67,98 @@
         {
           "category": "Cisco / Networking",
           "display": "Cisco Cheat",
-          "query": "cisco",
+          "query": "cisco router switch interface vlan",
           "source": "cisco cheat sheet",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "Cisco Commands",
-          "query": "cisco commands",
+          "query": "cisco show configure interface",
           "source": "cisco commands",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "Cisco Steps",
-          "query": "cisco steps",
+          "query": "cisco vlan trunk configure steps",
           "source": "cisco steps",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "Admin Cheat",
-          "query": "cisco linux admin cheatsheet",
+          "query": "linux admin user permission file",
           "source": "linux_admin_cheatsheet",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "Networking Intro",
-          "query": "cisco networking",
+          "query": "cisco networking osi ios configure interface",
           "source": "cisco_networking_intro",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "Datalink Network Layer",
-          "query": "cisco datalink network layer",
+          "query": "cisco datalink vlan router interface configure",
           "source": "cisco_datalink_network_layer",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "Intervlan Routing",
-          "query": "cisco intervlan routing",
+          "query": "cisco vlan ssh trunk intervlan routing",
           "source": "cisco_intervlan_routing",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "Troubleshooting Lab",
-          "query": "cisco troubleshooting",
+          "query": "cisco troubleshoot ping rip ospf verify",
           "source": "cisco_troubleshooting_lab",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "UDP TCP Transport Layer",
-          "query": "cisco udp tcp transport",
+          "query": "tcp udp transport wireshark port dns http",
           "source": "cisco_udp_tcp_transport_layer",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "Intervlan Routing Ipv6",
-          "query": "cisco intervlan routing ipv6",
+          "query": "cisco vlan trunk intervlan routing",
           "source": "intervlan_routing_ipv6",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "Routing RIP OSPF",
-          "query": "cisco routing rip ospf",
+          "query": "cisco rip ospf static route",
           "source": "routing_rip_ospf",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "OSPF ACL Dynamic Routing",
-          "query": "cisco ospf acl dynamic",
+          "query": "cisco ospf passive interface",
           "source": "ospf_acl_dynamic_routing",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "ACL NAT Pat",
-          "query": "cisco acl nat pat",
+          "query": "cisco acl nat overload",
           "source": "acl_nat_pat",
           "section": ""
         },
         {
           "category": "Cisco / Networking",
           "display": "Networking Cheat",
-          "query": "cisco networking cheatsheet",
+          "query": "cisco vlan ssh interface configure commands",
           "source": "cisco_networking_cheatsheet",
           "section": ""
         }
@@ -156,42 +170,42 @@
         {
           "category": "Linux",
           "display": "Linux Cheat",
-          "query": "linux",
+          "query": "linux commands user file permission",
           "source": "linux cheat sheet",
           "section": ""
         },
         {
           "category": "Linux",
           "display": "User Cheat",
-          "query": "linux user",
+          "query": "linux windows user group account",
           "source": "user cheat sheet",
           "section": ""
         },
         {
           "category": "Linux",
           "display": "Storage LVM RAID",
-          "query": "linux storage lvm raid",
+          "query": "lvm raid partition",
           "source": "linux_storage_lvm_raid",
           "section": ""
         },
         {
           "category": "Linux",
           "display": "Windows System Security",
-          "query": "linux windows system security",
+          "query": "ntfs selinux ssh",
           "source": "linux_windows_system_security",
           "section": ""
         },
         {
           "category": "Linux",
           "display": "Windows Application Services",
-          "query": "linux windows application services",
+          "query": "apache iis smb",
           "source": "linux_windows_application_services",
           "section": ""
         },
         {
           "category": "Linux",
           "display": "Mail Services",
-          "query": "linux mail services",
+          "query": "postfix dovecot smtp",
           "source": "linux_mail_services",
           "section": ""
         }
@@ -203,7 +217,7 @@
         {
           "category": "Windows Server",
           "display": "Networking Cheat",
-          "query": "windows networking",
+          "query": "cisco networking commands reference",
           "source": "networking cheat sheet",
           "section": ""
         },
@@ -217,56 +231,56 @@
         {
           "category": "Windows Server",
           "display": "Directory Services Part1",
-          "query": "windows directory services part1",
+          "query": "vyos rras rip",
           "source": "directory_services_part1",
           "section": ""
         },
         {
           "category": "Windows Server",
           "display": "AD Directory Services",
-          "query": "windows directory services",
+          "query": "replication dhcp iis",
           "source": "windows_ad_directory_services",
           "section": ""
         },
         {
           "category": "Windows Server",
           "display": "Group Policies",
-          "query": "windows group policies",
+          "query": "gpo baseline",
           "source": "windows_group_policies",
           "section": ""
         },
         {
           "category": "Windows Server",
           "display": "Security PKI",
-          "query": "windows security pki",
+          "query": "ipsec certificate adcs",
           "source": "windows_security_pki",
           "section": ""
         },
         {
           "category": "Windows Server",
           "display": "VPN Windows Linux",
-          "query": "vpn windows linux",
+          "query": "pptp sstp openvpn",
           "source": "vpn_windows_linux",
           "section": ""
         },
         {
           "category": "Windows Server",
           "display": "Windows Cheat",
-          "query": "linux windows cheatsheet",
+          "query": "lvm raid permission",
           "source": "linux_windows_cheatsheet",
           "section": ""
         },
         {
           "category": "Windows Server",
           "display": "Powershell Admin Cheat",
-          "query": "windows powershell admin cheatsheet",
+          "query": "powershell aduser new-aduser",
           "source": "powershell_admin_cheatsheet",
           "section": ""
         },
         {
           "category": "Windows Server",
           "display": "Core Cheat",
-          "query": "windows core cheatsheet",
+          "query": "sconfig cmd powershell",
           "source": "windows_core_cheatsheet",
           "section": ""
         }
