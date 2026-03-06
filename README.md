@@ -1,240 +1,166 @@
-# KB — Offline Knowledge Base Search
+# 🗂️ KB — Networking & Systems Knowledge Base
 
-A portable, offline-first knowledge base for sysadmin cheat sheets. Search commands, steps, and reference material from a Windows command prompt — no internet, no browser, no extra software needed on the machines you use it on.
-
----
-
-## How it works
-
-You write or paste your notes as `.txt` or `.json` files and run a Python script **once** on your own machine to generate a CSV database. That database, along with two small scripts, is everything you need. Copy those three files to any Windows PC and search instantly.
-
-```
-[Your notes]  →  python txt_to_kb.py  →  knowledge_base.csv
-                                       →  topics.json
-                          +  search_kb.ps1
-                          +  kb.bat
-                          └─ Copy these 4 files anywhere → works offline
-```
+A personal, searchable knowledge base for **Cisco networking**, **Windows Server / Active Directory**, **Linux administration**, and **subnetting** — built from course lab documents and cheat sheets.
 
 ---
 
-## Repository structure
+## What's in here
+
+| Category | Topics covered |
+|---|---|
+| 🔵 **Cisco / Networking** | VLANs, trunking, OSPF, RIP, ACLs, NAT/PAT, inter-VLAN routing, IPv6 |
+| 🟣 **Windows Server** | Active Directory, Group Policy, PKI/ADCS, VPN (PPTP/SSTP), RRAS, NPS |
+| 🟢 **Linux** | Postfix/Dovecot mail, OpenVPN, LVM/RAID, DNS (BIND), SELinux, storage |
+| 🟡 **Subnetting** | CIDR, VLSM, binary conversion, subnet tables, worked examples |
+
+---
+
+## Files
 
 ```
-kb/
-├── txt/                        ← Paste .txt cheat sheets here
-│   ├── user_cheat_sheet.txt
-│   ├── cisco_cheat_sheet.txt
-│   └── ...
-│
-├── json/                       ← Write structured .json entries here
-│   └── _template.json          ← Copy this as a starting point (ignored by parser)
-│
-├── txt_to_kb.py                ← Run once at home to generate the database
-│
-├── knowledge_base.csv          ← Generated — copy to all PCs
-├── topics.json                 ← Generated — copy to all PCs
-├── search_kb.ps1               ← Copy to all PCs
-├── kb.bat                      ← Copy to all PCs
-│
-└── kb_json_prompt.txt          ← Claude prompt to convert notes to JSON format
+txt/                   # Raw .txt cheat sheets and lab notes
+json/                  # Structured knowledge entries (one file per topic)
+knowledge_base.csv     # Generated — all entries in one searchable flat file
+topics.json            # Generated — browse menu for the PowerShell search tool
+txt_to_kb_v9.py        # Build script: converts txt/ and json/ → knowledge_base.csv
+add_tags_to_json.py    # Utility: auto-injects search tags into all json/ files
+search_kb.ps1          # PowerShell search UI (run on any Windows PC, no Python needed)
+kb.bat                 # One-click launcher for search_kb.ps1
 ```
 
 ---
 
-## Getting started
+## Quick start
 
-### 1. Generate the database (run once, on your own PC)
-
-Install dependencies:
+### 1 — Build the knowledge base
 
 ```bash
+# Install dependencies (one time)
 pip install nltk rapidfuzz
+
+# Generate knowledge_base.csv and topics.json from all source files
+python txt_to_kb_v9.py
 ```
 
-> `nltk` and `rapidfuzz` are optional but improve tag quality. The script works without them.
+### 2 — Search (Windows, no Python needed)
 
-Run the parser:
-
-```bash
-python txt_to_kb.py
-```
-
-This reads all `.txt` files from `txt/` and all `.json` files from `json/`, and outputs:
-- `knowledge_base.csv` — the searchable database
-- `topics.json` — the browse menu, auto-generated from your content
-
-### 2. Deploy to any PC
-
-Copy these 4 files to a folder on each machine (USB stick, network share, wherever):
+Copy these four files to any PC and double-click `kb.bat`:
 
 ```
-knowledge_base.csv
-topics.json
-search_kb.ps1
-kb.bat
+knowledge_base.csv   topics.json   search_kb.ps1   kb.bat
 ```
 
-No Python, no installs needed on those machines.
+### 3 — Add a new topic
 
-### 3. Run
-
-Double-click `kb.bat` or run it from a command prompt.
+1. Convert your document to JSON using the schema below
+2. Drop the `.json` file into `json/`
+3. Run `python add_tags_to_json.py` to generate search tags
+4. Run `python txt_to_kb_v9.py` to rebuild the CSV
 
 ---
 
-## Usage
+## JSON schema
 
-```
- ==============================================================
-  KB  //  Knowledge Base Search
- ==============================================================
-
-  [1]  Search
-  [2]  Browse by topic
-  [3]  Commands only  (quick lookup)
-  [4]  Help
-  [0]  Exit
-```
-
-**Search** — type any natural language query:
-```
-Search: how to create linux user
-Search: join desktop to domain
-Search: vlan trunk configuration
-Search: vlsm example
-```
-
-**Browse by topic** — dynamically built from your content, grouped by category (Linux, Windows Server, Cisco / Networking, Subnetting).
-
-**Commands only** — same as search but filters to `[COMMAND]` type entries only, useful for quick syntax lookups.
-
-Result types are colour-coded:
-- 🟢 `[COMMAND]` — CLI commands, config lines
-- 🟣 `[STEPS]` — numbered GUI/procedure steps
-- 🔵 `[PROSE]` — explanatory text, reference tables
-
----
-
-## Adding new content
-
-### Option A — Paste a cheat sheet as `.txt`
-
-Drop any `.txt` file into the `txt/` folder. The parser auto-detects the format (underline-style headings, dash-divided sections, or flat numbered sections) and splits it into searchable entries.
-
-Then re-run:
-```bash
-python txt_to_kb.py
-```
-
-### Option B — Write structured `.json`
-
-Better for content you write yourself — no ambiguity, full control over how entries are split and labelled.
-
-Copy `json/_template.json`, rename it (without the leading `_`), and fill it in:
+Each file in `json/` follows this structure:
 
 ```json
 {
-  "source": "my_topic",
-  "category": "Linux",
+  "source": "my_topic_name",
+  "category": "Linux | Windows Server | Cisco / Networking | Subnetting",
   "entries": [
     {
-      "section": "MY TOPIC: INSTALL SOMETHING",
-      "subsection": "Install",
-      "type": "command",
-      "content": "sudo dnf install something   # Install the package\nsudo systemctl enable something"
-    },
-    {
-      "section": "MY TOPIC: INSTALL SOMETHING",
-      "subsection": "Verify",
-      "type": "command",
-      "content": "systemctl status something"
+      "section": "SECTION HEADING IN CAPS",
+      "subsection": "Sub-heading (or empty string)",
+      "type": "command | steps | prose",
+      "content": "line one\nline two\nline three"
     }
   ]
 }
 ```
 
-**JSON fields:**
+**Field rules:**
 
-| Field | Required | Description |
-|---|---|---|
-| `source` | Yes | Short identifier, no spaces. Shown as `Source:` in results. |
-| `category` | No | Browse menu category. Auto-detected if omitted. |
-| `entries` | Yes | List of KB entries. Each becomes one search result. |
-| `section` | Yes (per entry) | Top-level heading, ALL CAPS. Shared across related entries. |
-| `subsection` | No | Sub-heading within the section. Use `""` to leave blank. |
-| `type` | No | `command`, `steps`, or `prose`. Auto-detected if omitted. |
-| `content` | Yes (per entry) | The content. Use `\n` for line breaks. |
+| Field | Notes |
+|---|---|
+| `source` | Lowercase, underscores, no spaces — e.g. `linux_bind_dns` |
+| `category` | Used for browse grouping and tag seeding |
+| `section` | ALL CAPS — top-level heading |
+| `subsection` | Title Case — sub-heading, or `""` if none |
+| `type` | `command` for CLI/config, `steps` for numbered instructions, `prose` for explanations |
+| `content` | Use `\n` for line breaks. Preserve commands exactly as written |
 
-Files starting with `_` are ignored by the parser (use for templates and drafts).
-
-### Using the Claude prompt
-
-`kb_json_prompt.txt` contains a prompt you can paste into Claude to automatically convert any cheat sheet or notes into the correct JSON format. Paste the prompt, then add your text at the bottom. Claude returns ready-to-use JSON.
+> **Tip:** Leave out the `tags` field — `add_tags_to_json.py` generates it automatically.
 
 ---
 
-## How search works
+## Tag generation
 
-The search engine uses a **two-tier matching** system:
+Tags are injected automatically by `add_tags_to_json.py` using:
 
-1. **Direct match** — the term appears literally in the section, subsection, or content text. Scored highest.
-2. **Synonym fallback** — if a term isn't in the text, synonyms and related keywords are checked against the pre-expanded tag column. Used as a fallback only.
-
-**Inclusion rule:** every query term must match somewhere, and at least half must be direct hits. This prevents over-broad synonym matches from flooding results with unrelated entries.
-
-Scoring weights:
-- Term in subsection: **+8**
-- Term in section: **+4**
-- Term in content: **+2**
-- All terms present together in content: **+5 bonus**
-- Entry is steps type: **+2**
-- Entry is command type: **+1**
-
-Common filler words (`how`, `to`, `the`, `a`, `in`, etc.) are stripped from queries automatically, so `how to create a linux user` and `create linux user` give the same results.
-
----
-
-## Parser command-line options
+- **Source keywords** — each known source has a seed word list (e.g. all Windows AD files get `active directory`, `domain controller`, `dc`, `adds`, `promote`, etc.)
+- **Section keywords** — section/subsection text is matched against a keyword map to pull in related synonyms
+- **Synonym expansion** — each matched word pulls in a synonym chain (e.g. `promote` → `domain controller, adds, forest, active directory`)
+- **Content extraction** — significant words from the entry content itself, with stemming/lemmatisation if `nltk` is available
 
 ```bash
-# Default (reads txt/ and json/, writes to current folder)
-python txt_to_kb.py
+# Add tags to all json/ files (skips entries that already have tags)
+python add_tags_to_json.py
 
-# Custom paths
-python txt_to_kb.py --txt path/to/txt --json path/to/json --out kb.csv --topics topics.json
+# Preview without writing
+python add_tags_to_json.py --dry-run
+
+# Re-generate all tags (overwrite existing)
+python add_tags_to_json.py --force
+
+# Create .bak backups before modifying
+python add_tags_to_json.py --backup
 ```
-
-| Flag | Default | Description |
-|---|---|---|
-| `--txt` | `./txt` | Folder containing `.txt` source files |
-| `--json` | `./json` | Folder containing `.json` source files |
-| `--out` | `./knowledge_base.csv` | Output CSV path |
-| `--topics` | `./topics.json` | Output topics JSON path |
 
 ---
 
-## Category detection
+## Search tips
 
-The browse menu groups topics into categories automatically based on keywords in the source filename and section names:
+The PowerShell search tool matches against `section`, `subsection`, `content`, and `tags` simultaneously, so you can query naturally:
 
-| Category | Detected from |
+| Query | Finds |
 |---|---|
-| Subnetting | `subnet`, `cidr`, `vlsm`, `binary`, `ultimatesubnet` |
-| Linux | `linux`, `dnf`, `rpm`, `bash`, `redhat`, `bind`, `named` |
-| Cisco / Networking | `cisco`, `vlan`, `ospf`, `routing`, `acl`, `nat` |
-| Windows Server | `windows`, `active directory`, `aduc`, `powershell`, `dns`, `dhcp`, `dc` |
+| `create active directory` | AD DS install, domain controller promotion steps |
+| `vpn certificate` | SSTP setup, PKI enrollment, RRAS cert binding |
+| `ospf passive` | OSPF passive interface config on Cisco routers |
+| `postfix tls` | Postfix TLS configuration, cert generation, Dovecot SSL |
+| `nat overload` | PAT / ip nat inside source list ... overload |
+| `vlsm` | VLSM subnetting examples and worked solutions |
 
-To override the detected category for a JSON file, set the `category` field explicitly.
+---
+
+## Sources
+
+- Directory Services (Windows + VyOS + Linux lab)
+- Inter-VLAN Routing & IPv6
+- Subnetting & OSPF
+- Windows Group Policies
+- Routing (RIP & OSPF)
+- Windows Security & PKI
+- OSPF & ACL Dynamic Routing
+- VPN under Windows & Linux
+- Linux Mail Services (Postfix + Dovecot)
+- ACL, NAT & PAT
 
 ---
 
 ## Requirements
 
-**To generate the database** (your machine only):
-- Python 3.10+
-- `pip install nltk rapidfuzz` *(optional, improves tag quality)*
+| Tool | Version | Purpose |
+|---|---|---|
+| Python | 3.8+ | Building the CSV |
+| nltk | latest | Richer tag stemming (optional but recommended) |
+| rapidfuzz | latest | Fuzzy search (optional) |
+| PowerShell | 5.1+ | Running the search UI on Windows |
 
-**To use the search tool** (any Windows PC):
-- Windows PowerShell (built into Windows, no install needed)
-- The 4 files: `knowledge_base.csv`, `topics.json`, `search_kb.ps1`, `kb.bat`
+```bash
+pip install nltk rapidfuzz
+```
+
+---
+
+*Generated entries are filtered — submission requirements, screenshots, and sign-off criteria are automatically stripped and won't appear in search results.*
