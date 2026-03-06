@@ -1,0 +1,68 @@
+Convert the text I give you into a knowledge base JSON file using the schema below.
+
+---
+
+SCHEMA:
+{
+  "source": "<short_identifier_no_spaces>",
+  "category": "<category>",
+  "entries": [
+    {
+      "section": "SECTION HEADING IN CAPS",
+      "subsection": "Sub-heading",
+      "type": "command | steps | prose",
+      "content": "line one\nline two\nline three"
+    }
+  ]
+}
+
+---
+
+RULES:
+
+source
+- Lowercase, underscores instead of spaces, no special characters
+- Example: "linux_bind_dns" or "windows_dhcp_setup"
+
+category
+- Pick the best fit: Linux | Windows Server | Cisco / Networking | Subnetting
+- Use "General" only if nothing else fits
+
+section
+- The top-level heading this entry belongs to, in ALL CAPS
+- If the text has numbered sections like "Section 3: DNS Setup", use that as-is
+- All entries from the same logical section share the same section value
+- Keep it short and descriptive: "LINUX BIND DNS" not "LINUX BIND DNS CONFIGURATION GUIDE"
+
+subsection
+- The sub-heading within the section, title case
+- Use "" (empty string) if there is no meaningful sub-heading
+
+type
+- "command"  → CLI commands, terminal lines, config file contents
+- "steps"    → numbered step-by-step instructions (1. do this, 2. do that)
+- "prose"    → explanatory text, notes, descriptions
+- If unsure, omit the field and let the parser auto-detect
+
+content
+- The actual text of that entry
+- Use \n for line breaks (JSON string, not a real newline)
+- Preserve indentation and inline comments (e.g. "# comment") as-is
+- Do NOT include section/subsection headings in the content — they go in the fields above
+- Do NOT include decorative lines (====, ----, ████) or "END OF FILE" markers
+- Keep commands exactly as written, including flags and syntax
+
+SPLITTING INTO ENTRIES:
+- Each distinct sub-heading or topic block becomes its own entry
+- If a block mixes commands and steps, split them into separate entries
+- If a block is very long (>20 lines), consider splitting by logical sub-topic
+- Short related commands can stay together in one entry
+
+OUTPUT:
+- Return only the raw JSON — no explanation, no markdown code fences, no commentary
+- Validate that it is correct JSON (no trailing commas, properly escaped strings)
+- Use 2-space indentation
+
+---
+
+Text to convert:
