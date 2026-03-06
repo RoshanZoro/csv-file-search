@@ -1,0 +1,276 @@
+{
+  "categories": [
+    {
+      "name": "Subnetting",
+      "topics": [
+        {
+          "category": "Subnetting",
+          "display": "Binary",
+          "query": "subnet binary",
+          "source": "binary",
+          "section": ""
+        },
+        {
+          "category": "Subnetting",
+          "display": "Subnet Cheat",
+          "query": "subnet",
+          "source": "subnet cheat sheet",
+          "section": ""
+        },
+        {
+          "category": "Subnetting",
+          "display": "Ultimatesubnet Cheat",
+          "query": "subnet ultimatesubnet",
+          "source": "ultimatesubnet cheat sheet",
+          "section": ""
+        },
+        {
+          "category": "Subnetting",
+          "display": "Ipv4 Subnetting VLSM",
+          "query": "subnet cisco ipv4 subnetting",
+          "source": "cisco_ipv4_subnetting_vlsm",
+          "section": ""
+        },
+        {
+          "category": "Subnetting",
+          "display": "Ipv4 VLSM Ipv6",
+          "query": "subnet cisco ipv4 vlsm",
+          "source": "cisco_ipv4_vlsm_ipv6",
+          "section": ""
+        },
+        {
+          "category": "Subnetting",
+          "display": "Subnetting OSPF Intervlan",
+          "query": "subnet subnetting ospf intervlan",
+          "source": "subnetting_ospf_intervlan",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "name": "Cisco / Networking",
+      "topics": [
+        {
+          "category": "Cisco / Networking",
+          "display": "Cisco Cheat",
+          "query": "cisco",
+          "source": "cisco cheat sheet",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "Cisco Commands",
+          "query": "cisco commands",
+          "source": "cisco commands",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "Cisco Steps",
+          "query": "cisco steps",
+          "source": "cisco steps",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "Admin Cheat",
+          "query": "cisco linux admin cheatsheet",
+          "source": "linux_admin_cheatsheet",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "Networking Intro",
+          "query": "cisco networking",
+          "source": "cisco_networking_intro",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "Datalink Network Layer",
+          "query": "cisco datalink network layer",
+          "source": "cisco_datalink_network_layer",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "Intervlan Routing",
+          "query": "cisco intervlan routing",
+          "source": "cisco_intervlan_routing",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "Troubleshooting Lab",
+          "query": "cisco troubleshooting",
+          "source": "cisco_troubleshooting_lab",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "UDP TCP Transport Layer",
+          "query": "cisco udp tcp transport",
+          "source": "cisco_udp_tcp_transport_layer",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "Intervlan Routing Ipv6",
+          "query": "cisco intervlan routing ipv6",
+          "source": "intervlan_routing_ipv6",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "Routing RIP OSPF",
+          "query": "cisco routing rip ospf",
+          "source": "routing_rip_ospf",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "OSPF ACL Dynamic Routing",
+          "query": "cisco ospf acl dynamic",
+          "source": "ospf_acl_dynamic_routing",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "ACL NAT Pat",
+          "query": "cisco acl nat pat",
+          "source": "acl_nat_pat",
+          "section": ""
+        },
+        {
+          "category": "Cisco / Networking",
+          "display": "Networking Cheat",
+          "query": "cisco networking cheatsheet",
+          "source": "cisco_networking_cheatsheet",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "name": "Linux",
+      "topics": [
+        {
+          "category": "Linux",
+          "display": "Linux Cheat",
+          "query": "linux",
+          "source": "linux cheat sheet",
+          "section": ""
+        },
+        {
+          "category": "Linux",
+          "display": "User Cheat",
+          "query": "linux user",
+          "source": "user cheat sheet",
+          "section": ""
+        },
+        {
+          "category": "Linux",
+          "display": "Storage LVM RAID",
+          "query": "linux storage lvm raid",
+          "source": "linux_storage_lvm_raid",
+          "section": ""
+        },
+        {
+          "category": "Linux",
+          "display": "Windows System Security",
+          "query": "linux windows system security",
+          "source": "linux_windows_system_security",
+          "section": ""
+        },
+        {
+          "category": "Linux",
+          "display": "Windows Application Services",
+          "query": "linux windows application services",
+          "source": "linux_windows_application_services",
+          "section": ""
+        },
+        {
+          "category": "Linux",
+          "display": "Mail Services",
+          "query": "linux mail services",
+          "source": "linux_mail_services",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "name": "Windows Server",
+      "topics": [
+        {
+          "category": "Windows Server",
+          "display": "Networking Cheat",
+          "query": "windows networking",
+          "source": "networking cheat sheet",
+          "section": ""
+        },
+        {
+          "category": "Windows Server",
+          "display": "Powershell Cheat",
+          "query": "windows powershell",
+          "source": "powershell cheat sheet",
+          "section": ""
+        },
+        {
+          "category": "Windows Server",
+          "display": "Directory Services Part1",
+          "query": "windows directory services part1",
+          "source": "directory_services_part1",
+          "section": ""
+        },
+        {
+          "category": "Windows Server",
+          "display": "AD Directory Services",
+          "query": "windows directory services",
+          "source": "windows_ad_directory_services",
+          "section": ""
+        },
+        {
+          "category": "Windows Server",
+          "display": "Group Policies",
+          "query": "windows group policies",
+          "source": "windows_group_policies",
+          "section": ""
+        },
+        {
+          "category": "Windows Server",
+          "display": "Security PKI",
+          "query": "windows security pki",
+          "source": "windows_security_pki",
+          "section": ""
+        },
+        {
+          "category": "Windows Server",
+          "display": "VPN Windows Linux",
+          "query": "vpn windows linux",
+          "source": "vpn_windows_linux",
+          "section": ""
+        },
+        {
+          "category": "Windows Server",
+          "display": "Windows Cheat",
+          "query": "linux windows cheatsheet",
+          "source": "linux_windows_cheatsheet",
+          "section": ""
+        },
+        {
+          "category": "Windows Server",
+          "display": "Powershell Admin Cheat",
+          "query": "windows powershell admin cheatsheet",
+          "source": "powershell_admin_cheatsheet",
+          "section": ""
+        },
+        {
+          "category": "Windows Server",
+          "display": "Core Cheat",
+          "query": "windows core cheatsheet",
+          "source": "windows_core_cheatsheet",
+          "section": ""
+        }
+      ]
+    }
+  ]
+}
