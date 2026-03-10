@@ -1,0 +1,129 @@
+---
+
+Convert the text I give you into a knowledge base JSON file using the schema below.
+
+---
+SCHEMA:
+```json
+{
+  "source": "<short_identifier_no_spaces>",
+  "category": "<category>",
+  "entries": [
+    {
+      "section": "SECTION HEADING IN CAPS",
+      "subsection": "Sub-heading",
+      "type": "command | steps | prose",
+      "tags": ["tag1", "tag2", "tag3"],
+      "content": "line one\nline two\nline three"
+    }
+  ]
+}
+```
+
+---
+RULES:
+
+**source**
+- Lowercase, underscores instead of spaces, no special characters
+- Match an existing source if applicable, otherwise create a descriptive one: e.g. `"linux_bind_dns"` or `"windows_dhcp_setup"`
+
+**category**
+- Pick the best fit: `Linux` | `Windows Server` | `Cisco / Networking` | `Subnetting`
+- Use `"General"` only if nothing else fits
+
+**section**
+- Top-level heading in ALL CAPS
+- All entries from the same logical section share the same section value
+- Keep it short and descriptive: `"OSPF CONFIGURATION"` not `"OSPF CONFIGURATION GUIDE FOR CISCO ROUTERS"`
+
+**subsection**
+- Sub-heading within the section, Title Case
+- Use `""` if there is no meaningful sub-heading
+
+**type**
+- `"command"` → CLI commands, terminal lines, config file contents
+- `"steps"` → numbered step-by-step instructions
+- `"prose"` → explanatory text, notes, descriptions
+
+---
+
+**tags** *(required — read this section carefully)*
+
+Tags are the primary search and retrieval mechanism. Every entry must have tags that make it findable from multiple angles. Think like someone searching for this content — what words would they type?
+
+**Layer 1 — Domain anchors** *(always include, 2–5 tags)*
+The technology domain this entry belongs to. These make entries filterable by category.
+- Linux entries: `linux` + the specific subsystem (e.g. `storage`, `mail`, `users`, `packages`, `sudo`)
+- Windows entries: `windows` + the specific subsystem (e.g. `active-directory`, `group-policy`, `pki`, `vpn`)
+- Cisco entries: `cisco` + the specific subsystem (e.g. `routing`, `vlans`, `acl`, `nat`, `ospf`)
+- Subnetting entries: `subnetting` + relevant concept (e.g. `cidr`, `vlsm`, `ipv4`)
+
+**Layer 2 — Topic tags** *(derived from section + subsection, 3–8 tags)*
+Exact keywords a person would search for when looking for this specific topic.
+- Use the actual technology/protocol names: `lvm`, `postfix`, `ospf`, `aduc`, `wireguard`, `mdadm`
+- Use the action being performed: `install`, `configure`, `create`, `delete`, `extend`, `join`, `promote`
+- Use the object being acted on: `user`, `group`, `volume`, `interface`, `certificate`, `domain`, `vlan`
+
+**Layer 3 — Content tags** *(extracted from the actual content, 5–15 tags)*
+Scan the content and extract:
+- Every command name or binary mentioned: `useradd`, `dnf`, `lvextend`, `ospf`, `New-ADUser`
+- Every flag or option that's meaningful: `--permanent`, `-m`, `-g`, `-L`
+- Every config file, path, or key term: `main.cf`, `/etc/passwd`, `switchport`, `area 0`
+- Every protocol, port, or standard: `smtp`, `port-25`, `tls`, `802.1q`
+- Every error, state, or condition mentioned: `failed`, `expired`, `locked`, `passive`
+
+**Layer 4 — Synonym + alias tags** *(for discoverability, 3–8 tags)*
+Add alternate names someone might search instead:
+- Abbreviations AND full forms: if content has `ad` → also add `active-directory`; if `lv` → also add `logical-volume`
+- Common misspellings or alternates: `organisational` and `organizational`
+- Role-based terms: if about creating users → also add `account`, `onboarding`; if about certificates → also add `ssl`, `tls`, `pki`
+- Outcome-based terms: what does completing this entry achieve? e.g. `redundancy`, `encryption`, `remote-access`, `fault-tolerance`
+
+**Tag formatting rules:**
+- All lowercase
+- Use hyphens for multi-word concepts: `active-directory`, `domain-controller`, `logical-volume`
+- No duplicates
+- No stop words (the, and, for, with, from, are, etc.)
+- Maximum 60 tags per entry — quality over quantity
+- Every tag must be directly relevant to THIS entry's content — do not add generic filler
+
+**Modularity rule:**
+Each entry's tags must be self-contained. Someone searching `postfix` should find the postfix entry. Someone searching `smtp` should also find it. Someone searching `mail configure linux` should also find it. All three search patterns must be covered by the tags alone.
+
+---
+
+**content**
+- The actual text of the entry
+- Use `\n` for line breaks
+- Preserve indentation and inline comments (e.g. `# comment`) as-is
+- Do NOT include section/subsection headings in the content
+- Do NOT include decorative lines (`====`, `----`) or `"END OF FILE"` markers
+- Keep commands exactly as written
+
+---
+SPLITTING INTO ENTRIES:
+- Each distinct sub-heading or topic block becomes its own entry
+- Split entries that mix commands and prose into separate entries
+- Split entries longer than 20 lines by logical sub-topic
+- Short related commands can stay in one entry
+
+---
+OUTPUT:
+- Raw JSON only — no explanation, no markdown fences, no commentary
+- Valid JSON: no trailing commas, properly escaped strings
+- 2-space indentation
+
+---
+Text to convert:
+
+---
+
+**Key changes and why:**
+
+The previous version generated tags by mirroring keyword lookup tables, which produced bloated, generic tag lists. This version instead builds tags in **4 distinct layers**:
+
+- **Layer 1** anchors every entry to its domain so category filtering works
+- **Layer 2** captures the topic with action + object pairs (`create user`, `extend volume`) making entries findable by intent
+- **Layer 3** extracts the actual commands, flags, config files, and protocols from the content — the most precise search signals
+- **Layer 4** adds synonyms and outcome terms so searches using alternate vocabulary still hit the right entry
+- The **modularity rule** explicitly instructs the model to make each entry independently searchable, so your KB works whether you search broadly or narrowly
